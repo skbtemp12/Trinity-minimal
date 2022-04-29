@@ -9,9 +9,9 @@ echo "#include <stdio.h>
 
 int main()
 {       
-	printf();
+    printf();
 
-	return 0;
+    return 0;
 }
 " > $1.c;
 kate $1.c > /dev/null 2>1&
