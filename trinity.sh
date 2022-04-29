@@ -67,3 +67,4 @@ sudo chmod +x c
 sudo chmod +x run
 sudo cp c /usr/bin
 sudo cp run /usr/bin
+echo "hwdec=vaapi" > ~/.config/mpv/mpv.conf
