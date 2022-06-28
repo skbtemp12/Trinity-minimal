@@ -1,0 +1,90 @@
+#!/bin/bash
+
+# Author: Mr. Garbage
+# This program will manage Trinity-OS owned utilities
+# usage: trinity install <package_name>
+# example: trinity install uiu
+# version: 1.0
+
+
+packageName=$2;
+
+if [[ "$1" == "" || "$2" == "" ]]
+then
+    echo "
+       ------------------------------------------------------------------
+       *                                                                *
+       *            Trinity-OS owned utilities package manager          *
+       *                                                                *
+       *                      Usage:                                    *
+       *                    * trinity <option> <package_name>           *
+       *                    * trinity search uiu                        *
+       *                    * trinity install uiu                       *
+       *                                                                *
+       ------------------------------------------------------------------
+        "
+    exit;
+fi;
+
+
+# package manager
+response=$(curl -s -I https://raw.githubusercontent.com/skbtemp12/TrinityRepo/main/$packageName |grep "HTTP" |cut -d " " -f2);
+
+
+
+# package search
+if [[ "$1" == "search" &&  "$response" == "200" ]]
+then
+    echo "
+
+    $packageName is available in the repository   ^^
+
+    "
+    exit;
+
+elif [[ "$1" == "search" &&  "$response" == "404" ]]
+then
+    echo "
+
+    $packageName is not available in the repository   ^^
+
+    "
+    exit;
+fi;
+
+
+
+# package installer
+if [[ "$1" == "install" &&  "$response" == "200" ]]
+then
+    cd /tmp;
+    sudo echo "
+    Downloading $packageName package ..."
+    curl -s https://raw.githubusercontent.com/skbtemp12/TrinityRepo/main/$packageName > $packageName;
+    chmod +x $packageName;
+    sudo cp $packageName /usr/bin;
+    echo "
+    $packageName installed successfully    ^^
+    "
+    cd ~
+
+elif [[ "$response" == "404" ]]
+then
+    echo "
+
+    There is no such package in the repository as $packageName     -_-
+
+    "
+else
+    echo "
+
+    $packageName did not installed successfully    ^^
+
+    "
+
+fi;
+
+
+
+exit
+
