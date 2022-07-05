@@ -58,6 +58,16 @@ fi;
 if [[ "$1" == "install" &&  "$response" == "200" ]]
 then
     cd /tmp;
+
+    # Installing requirements
+    sudo echo "
+    Checking requirements ..."
+    requirements=$(curl -s https://raw.githubusercontent.com/skbtemp12/TrinityRepo/main/${packageName}-requirements);
+    echo "    $requirements need to be to installed
+    "
+    sudo apt install $requirements -y;
+
+    # Installing main packages
     sudo echo "
     Downloading $packageName package ..."
     curl -s https://raw.githubusercontent.com/skbtemp12/TrinityRepo/main/$packageName > $packageName;
