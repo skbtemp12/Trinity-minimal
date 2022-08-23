@@ -67,3 +67,8 @@ sudo chmod +x c
 sudo chmod +x run
 sudo cp c /usr/bin
 sudo cp run /usr/bin
+
+
+
+# fix boot time
+sudo systemctl disable NetworkManager-wait-online.service
