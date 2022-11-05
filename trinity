@@ -37,7 +37,8 @@ if [[ "$1" == "search" &&  "$response" == "200" ]]
 then
     echo "
 
-    $packageName is available in the repository   ^^
+    $packageName is available in the repository, can be installed with:
+    trinity install $packageName
 
     "
     exit;
